@@ -1,1 +1,2 @@
 yolo/yolov4-416.trt
+*.pyc

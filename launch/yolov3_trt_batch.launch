@@ -6,8 +6,8 @@
   	<arg name="network_param_file"         default="$(find yolo_trt_ros)/config/yolov3.yaml"/>
 
 	<!-- rqt dashboard-->>
-  	<node name = "my_rqt_dashboard" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" 
-		  args = "--perspective-file $(find yolo_trt_ros)/config/yolo_trt_ros.perspective"/>
+  	<?ignore <node name = "my_rqt_dashboard" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" 
+		  args = "--perspective-file $(find yolo_trt_ros)/config/yolo_trt_ros.perspective"/> ?>
 	
 	<!-- yolo_trt_node -->
 	<node pkg="yolo_trt_ros" type="trt_yolo_v3_batch.py" name="yolo_trt_node_batch" output="screen">

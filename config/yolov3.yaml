@@ -1,7 +1,7 @@
 yolo_model:
 
   model:
-    name: 'yolov3'
+    name: 'yolov3_tiny'
   input_shape:
     value: '416'
   confidence_threshold:

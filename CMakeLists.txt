@@ -1,12 +1,19 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(yolo_trt_ros)
 
-find_package(OpenCV 4.2.0 REQUIRED
-    	PATHS /usr/local
-	NO_DEFAULT_PATH	
-)
+find_package(OpenCV REQUIRED)
 
 find_package(CUDA REQUIRED)
+
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
+
+if(PYTHONLIBS_FOUND)
+  message(STATUS "Using Python Libraries at: " ${PYTHON_LIBRARIES})
+  message(STATUS "Using Python include directories at: " ${PYTHON_INCLUDE_DIRS})
+else()
+  message(WARNING "Could not find Python Libraries")
+endif()
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/package.xml ${CMAKE_CURRENT_SOURCE_DIR}/package.xml COPYONLY)
 
@@ -42,7 +49,7 @@ catkin_package(
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")	# enable c++11 (TensorRT requirement)
-include_directories(${catkin_INCLUDE_DIRS} ${CUDA_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
+include_directories(${PYTHON_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS} ${CUDA_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 add_definitions(-DROS1)
 
 catkin_install_python(PROGRAMS trt_yolo_v3_batch.py
